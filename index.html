@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【改訂版】AIメディカルチェッカー：製薬業界資材レビューの変革</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #E2E8F0;
+            color: #1E293B;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 1rem;
+            margin: 0;
+        }
+        .aspect-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 1280px;
+            aspect-ratio: 16 / 9;
+            background-color: #F7F9FB;
+            border-radius: 1rem;
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+            overflow: hidden;
+        }
+        .slide-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 2.5rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+            pointer-events: none;
+        }
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            z-index: 10;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #01BAEF, #0B4F6C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .flowchart-box {
+            border: 2px solid #01BAEF;
+            background-color: #FFFFFF;
+        }
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 20;
+            background-color: rgba(0, 0, 0, 0.3);
+            color: white;
+            border-radius: 50%;
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .nav-button:hover {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        #prev-btn { left: 1rem; }
+        #next-btn { right: 1rem; }
+        .progress-dots {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            display: flex;
+            gap: 0.5rem;
+        }
+        .progress-dots .dot {
+            width: 0.75rem;
+            height: 0.75rem;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+        .progress-dots .dot.active {
+            background-color: #0B4F6C;
+        }
+        .slide-header {
+            width: 100%;
+            padding-top: 1.5rem; 
+            padding-bottom: 1rem; 
+        }
+        .slide-content {
+            width: 100%;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 0; 
+        }
+        .doc-box {
+            background-color: white;
+            border: 1px solid #E2E8F0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            height: 100%;
+            overflow-y: auto;
+        }
+        .scrollable-content {
+            max-height: 100%;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="aspect-wrapper">
+        <div class="slide-container">
+            <!-- Slide 1: Title (Restored) -->
+            <div class="slide active" style="justify-content: center;">
+                <header class="w-full absolute top-0 left-0 p-6 flex justify-between items-center">
+                    <h1 class="text-xl font-bold text-[#0B4F6C]">AIメディカルチェッカー</h1>
+                </header>
+                <section class="text-center">
+                    <h2 class="text-6xl md:text-7xl font-black mb-4">
+                        <span class="gradient-text">資材レビュー業務</span>に、革命を。
+                    </h2>
+                    <p class="max-w-3xl mx-auto text-xl text-slate-600">
+                        製薬業界の医療情報コンテンツ制作は、見えない課題に直面しています。AIメディカルチェッカーが、非効率な業務を根底から覆し、貴社の価値創造を加速させます。
+                    </p>
+                </section>
+                <footer class="absolute bottom-6 right-6 text-slate-500 text-sm">&copy; 2025 HAKUHODO MEDICAL Inc.</footer>
+            </div>
+            
+            <!-- NEW Slide 2: Hook -->
+            <div class="slide">
+                <div class="slide-header">
+                    <h3 class="text-4xl font-bold text-center mb-2">終わらない確認作業、増え続ける「見えないコスト」</h3>
+                    <p class="text-center text-slate-500 max-w-3xl mx-auto">担当者の時間は、本来もっと価値ある業務に使われるべきです。しかし、現実には膨大な確認作業が業務を圧迫し、見えないコストとして積み上がっています。</p>
+                </div>
+                <div class="slide-content">
+                    <div class="w-full max-w-6xl mx-auto grid grid-cols-3 gap-8">
+                        <div class="bg-white/60 p-6 rounded-2xl shadow-lg text-center">
+                            <div class="text-6xl mb-4">⏰</div>
+                            <h4 class="text-2xl font-bold mb-2 text-[#0B4F6C]">膨大な作業時間</h4>
+                            <p class="text-slate-600 text-sm">ひとつの資材に対するレビューは平均5営業日。担当者は常に複数の案件を抱え、時間に追われています。</p>
+                        </div>
+                        <div class="bg-white/60 p-6 rounded-2xl shadow-lg text-center">
+                            <div class="text-6xl mb-4">🔄</div>
+                            <h4 class="text-2xl font-bold mb-2 text-[#0B4F6C]">手戻りの多発</h4>
+                            <p class="text-slate-600 text-sm">担当者間の解釈のズレや見落としにより、差し戻しや修正が頻発。生産性を著しく低下させています。</p>
+                        </div>
+                        <div class="bg-white/60 p-6 rounded-2xl shadow-lg text-center">
+                            <div class="text-6xl mb-4">💸</div>
+                            <h4 class="text-2xl font-bold mb-2 text-[#0B4F6C]">機会損失</h4>
+                            <p class="text-slate-600 text-sm">確認作業に忙殺され、他の業務の時間を圧迫しています。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: 3 Factors (NEW LAYOUT) -->
+            <div class="slide">
+                <div class="slide-header">
+                    <h3 class="text-4xl font-bold text-center mb-2">審査業務を圧迫する「3つの要因」</h3>
+                </div>
+                <div class="slide-content">
+                    <div class="w-full max-w-4xl mx-auto">
+                        <ul class="space-y-6">
+                            <!-- Item 1 -->
+                            <li class="flex items-start gap-6 p-4 bg-white rounded-xl shadow">
+                                <div class="flex-shrink-0 text-5xl bg-slate-100 rounded-full w-20 h-20 flex items-center justify-center">🧬</div>
+                                <div>
+                                    <h4 class="text-2xl font-bold mb-1 text-[#0B4F6C]">情報の複雑化・高度化</h4>
+                                    <p class="text-slate-600">新薬開発の進展に伴い、扱うべき医療情報がますます複雑に。専門性の高い内容の正確な理解が求められます。</p>
+                                </div>
+                            </li>
+                            <!-- Item 2 -->
+                            <li class="flex items-start gap-6 p-4 bg-white rounded-xl shadow">
+                                <div class="flex-shrink-0 text-5xl bg-slate-100 rounded-full w-20 h-20 flex items-center justify-center">🔄</div>
+                                <div>
+                                    <h4 class="text-2xl font-bold mb-1 text-[#0B4F6C]">頻繁な一次資料更新</h4>
+                                    <p class="text-slate-600">ドラッグ・ラグ解消のための迅速な承認プロセスにより、添付文書等の更新頻度が増加。広範囲の資材の再確認業務が多大な労力に。</p>
+                                </div>
+                            </li>
+                            <!-- Item 3 -->
+                            <li class="flex items-start gap-6 p-4 bg-white rounded-xl shadow">
+                                <div class="flex-shrink-0 text-5xl bg-slate-100 rounded-full w-20 h-20 flex items-center justify-center">📜</div>
+                                <div>
+                                    <h4 class="text-2xl font-bold mb-1 text-[#0B4F6C]">厳格化する規制</h4>
+                                    <p class="text-slate-600">ブルーブックに代表される厳格な規制遵守が不可欠。チェック項目は改訂ごとに増加し、約200項目に達しています。（博報堂メディカル調べ）</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: The Wall of Tacit Knowledge -->
+             <div class="slide">
+                <div class="slide-header">
+                    <h3 class="text-4xl font-bold text-center mb-2">最大の壁は『暗黙知』</h3>
+                    <p class="text-center text-slate-500 max-w-3xl mx-auto">これらの外部要因は、組織内部に最も解決の難しい「壁」を生み出します。それこそが、属人化したノウハウ、すなわち『暗黙知』です。</p>
+                </div>
+                <div class="slide-content">
+                    <div class="w-full max-w-5xl mx-auto flex flex-col items-center justify-center">
+                        <div class="bg-white p-8 rounded-2xl shadow-xl text-center border-t-8 border-red-500 w-2/3">
+                            <div class="text-6xl mb-4">👤</div>
+                            <h4 class="text-3xl font-bold mb-2 text-red-700">暗黙知の壁</h4>
+                            <p class="text-slate-600 text-sm">ベテランの経験と勘に依存した審査プロセス。判断基準が明文化されず、品質のばらつき、時間の浪費、コンプライアンスリスクを生む、最も根深い課題です。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 5: Core Tech (REVISED with images) -->
+            <div class="slide">
+                 <div class="slide-header">
+                     <h3 class="text-4xl font-bold mb-2 text-center">我々の解決策：AIによる「暗黙知」の形式知化</h3>
+                      <p class="text-center text-slate-500 max-w-4xl mx-auto">属人的な判断ロジックを、再現性のあるアルゴリズムに変換し、誰でも公平・均質な一次チェックを可能にします。</p>
+                 </div>
+                 <div class="slide-content">
+                      <div class="w-full max-w-5xl mx-auto grid grid-cols-2 gap-8 items-center">
+                          <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=1931&auto=format&fit=crop" alt="プログラミング言語のイメージ" class="rounded-lg shadow-lg object-cover w-full h-96">
+                           <img src="https://h-medical.github.io/AI-presentation/Diagram_Image.png" alt="フローチャートのイメージ" class="rounded-lg shadow-lg object-cover w-full h-96">
+                      </div>
+                 </div>
+            </div>
+
+            <!-- Slide 6: Solution Intro (Moved & MODIFIED) -->
+            <div class="slide relative">
+                <div class="slide-header">
+                    <h3 class="text-4xl font-bold text-center mb-2">AIがもたらす圧倒的な業務効率化</h3>
+                    <p class="text-center text-slate-500 max-w-3xl mx-auto">「暗黙知の形式知化」により、これまで人の経験に頼らざるを得なかった確認作業が、AIによって劇的に高速化されます。</p>
+                </div>
+                <div class="slide-content">
+                    <div class="text-center">
+                        <p class="text-slate-600 text-3xl">レビュー時間*</p>
+                        <p class="font-black text-7xl md:text-8xl my-2"><span class="text-slate-400 line-through">5営業日</span> <span class="mx-4">→</span> <span class="gradient-text">30分</span></p>
+                    </div>
+                </div>
+                 <p class="absolute bottom-6 right-6 text-sm text-slate-500">*AIによる解析時間</p>
+            </div>
+
+            <!-- Slide 7: Architecture -->
+            <div class="slide">
+                 <div class="slide-header">
+                     <h3 class="text-4xl font-bold mb-2 text-center">AIメディカルチェッカーの全体設計</h3>
+                      <p class="text-center text-slate-500 max-w-4xl mx-auto">複数の情報源をインプットとし、構造解析と独自のアルゴリズムを経て、精度の高いアラートを生成します。</p>
+                 </div>
+                 <div class="slide-content">
+                      <div class="w-full max-w-6xl mx-auto bg-white p-8 rounded-xl shadow-lg flex items-stretch justify-around gap-2">
+                           <div class="text-center flex-1 flex flex-col">
+                                <h4 class="text-lg font-bold mb-4">1. インプット</h4>
+                                <div class="space-y-2 text-sm flex-1 flex flex-col justify-center">
+                                     <div class="bg-slate-100 p-2 rounded">IF / CTD</div>
+                                     <div class="bg-slate-100 p-2 rounded">添付文書</div>
+                                     <div class="bg-slate-100 p-2 rounded">総合製品情報概要</div>
+                                </div>
+                           </div>
+                           <div class="flex items-center text-5xl text-slate-300 font-light">→</div>
+                           <div class="text-center flex-1 flex flex-col">
+                                <h4 class="text-lg font-bold mb-4">2. 構造化 & 解析</h4>
+                                 <div class="flowchart-box rounded-xl p-4 flex-1 flex flex-col justify-center">
+                                     <p class="text-5xl">🤖</p>
+                                     <h4 class="text-md font-bold text-[#0B4F6C]">AIエンジン</h4>
+                                     <p class="text-xs text-slate-500">レイアウト解析 + テキスト抽出</p>
+                                 </div>
+                           </div>
+                           <div class="flex items-center text-5xl text-slate-300 font-light">→</div>
+                           <div class="text-center flex-1 flex flex-col">
+                                <h4 class="text-lg font-bold mb-4">3. アルゴリズム適用</h4>
+                                <div class="flowchart-box rounded-xl p-4 flex-1 flex flex-col justify-center">
+                                     <p class="text-5xl">📚</p>
+                                     <h4 class="text-md font-bold text-[#0B4F6C]">ルールベース照合</h4>
+                                     <p class="text-xs text-slate-500">約200のチェックリスト<br/>15の専門用語リスト</p>
+                                </div>
+                           </div>
+                           <div class="flex items-center text-5xl text-slate-300 font-light">→</div>
+                           <div class="text-center flex-1 flex flex-col">
+                                <h4 class="text-lg font-bold mb-4">4. アウトプット</h4>
+                                <div class="p-4 bg-green-100 border-2 border-green-500 rounded-xl flex-1 flex flex-col justify-center">
+                                     <p class="text-5xl">📊</p>
+                                    <p class="text-green-700 font-bold">アラート表示</p>
+                                </div>
+                           </div>
+                      </div>
+                 </div>
+            </div>
+
+            <!-- Slide 8: Structuring Importance (REVISED) -->
+            <div class="slide">
+                <div class="slide-header">
+                    <h3 class="text-4xl font-bold mb-2 text-center">メディカル文書の構造化</h3>
+                    <p class="text-center text-slate-500 max-w-4xl mx-auto">Python解析エンジンとLLMの組合せで、レイアウトと意味の塊を解析・再構築（ハイブリッド技術）</p>
+                </div>
+                <div class="slide-content flex-col w-full">
+                    <div class="w-full max-w-6xl mx-auto grid grid-cols-5 items-center gap-4 flex-grow">
+                        <!-- Before -->
+                        <div class="text-center h-full flex flex-col col-span-2">
+                            <h4 class="text-xl font-bold mb-2 text-slate-500">従来</h4>
+                            <div class="doc-box p-4 bg-slate-100 flex-grow">
+                                <p class="font-bold text-lg mb-4">総合製品情報概要</p>
+                                <div class="space-y-2">
+                                    <div class="h-2 w-full bg-slate-300 rounded-sm"></div><div class="h-2 w-full bg-slate-300 rounded-sm"></div><div class="h-2 w-full bg-slate-300 rounded-sm"></div><div class="h-2 w-full bg-slate-300 rounded-sm"></div><div class="h-2 w-full bg-slate-300 rounded-sm"></div><div class="h-2 w-full bg-slate-300 rounded-sm"></div><div class="h-2 w-full bg-slate-300 rounded-sm"></div><div class="h-2 w-full bg-slate-300 rounded-sm"></div><div class="h-2 w-full bg-slate-300 rounded-sm"></div><div class="h-2 w-full bg-slate-300 rounded-sm"></div><div class="h-2 w-full bg-slate-300 rounded-sm"></div>
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-500 mt-1">テキストの羅列では、AIは文脈を理解できません。</p>
+                        </div>
+                        <!-- Arrow -->
+                        <div class="text-center col-span-1">
+                            <div class="text-6xl text-slate-300 font-light">→</div>
+                        </div>
+                        <!-- After -->
+                        <div class="text-center h-full flex flex-col col-span-2">
+                             <h4 class="text-xl font-bold mb-2 text-blue-600">当社のAI</h4>
+                             <div class="doc-box p-4 flex-grow border-2 border-blue-400">
+                                <p class="font-bold text-lg mb-4">総合製品情報概要</p>
+                                <div class="space-y-3">
+                                    <div class="h-4 bg-slate-700 rounded-sm w-1/2"></div>
+                                    <div class="space-y-1 mt-1"><div class="h-2 bg-slate-400 w-full rounded-sm"></div><div class="h-2 bg-slate-400 w-5/6 rounded-sm"></div></div>
+                                    <div class="h-4 bg-slate-600 rounded-sm w-3/4 mt-4"></div>
+                                    <div class="space-y-1 mt-1"><div class="h-2 bg-slate-400 w-full rounded-sm"></div><div class="pl-4 space-y-1"><div class="h-2 bg-slate-400 w-5/6 rounded-sm"></div></div></div>
+                                    <div class="flex gap-2 mt-3">
+                                        <div class="w-1/2 h-24 bg-blue-100 rounded-sm p-2 space-y-2"><div class="h-2 bg-blue-300 w-1/2 rounded-sm"></div><div class="h-16 w-full bg-blue-200 rounded-sm"></div></div>
+                                        <div class="w-1/2 h-24 bg-green-100 rounded-sm p-2 space-y-2"><div class="h-2 bg-green-300 w-1/2 rounded-sm"></div><div class="h-16 w-full bg-green-200 rounded-sm"></div></div>
+                                    </div>
+                                     <div class="h-2 bg-slate-400 w-full rounded-sm mt-3"></div>
+                                </div>
+                             </div>
+                             <p class="text-xs text-slate-500 mt-1">構造化により、「どのルールを」「どこに」適用すべきか、AIが正確に判断します。</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-4 flex-shrink-0">※インタビューフォーム、CTD、添付文書も同様に構造化して解析します。</p>
+                </div>
+            </div>
+            
+            <!-- NEW Slide 9: Algorithm Deep Dive -->
+            <div class="slide">
+                 <div class="slide-header">
+                     <h3 class="text-4xl font-bold mb-2 text-center">『暗黙知』をルールベースでアルゴリズム化</h3>
+                      <p class="text-center text-slate-500 max-w-4xl mx-auto">AIは単にルールと照合するだけではありません。ベテランのように「考え」、判断基準を標準化することで、品質のブレをなくします。</p>
+                 </div>
+                 <div class="slide-content">
+                      <div class="w-full max-w-6xl mx-auto grid grid-cols-3 gap-8">
+                           <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                                <p class="text-5xl mb-4">⚙️</p>
+                                 <h4 class="text-xl font-bold text-[#0B4F6C] mb-2">「まず、どこを見るか」をAIが実行</h4>
+                                 <p class="text-slate-600 text-sm">ベテランの「まず添付文書のこの部分を見て、次にIFのあそこを確認する」といった、思考の順番・手順（暗黙知）そのものをアルゴリズム化。AIが律儀にそのプロセスを再現します。</p>
+                           </div>
+                           <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                                <p class="text-5xl mb-4">🌿</p>
+                                <h4 class="text-xl font-bold text-[#0B4F6C] mb-2">「この場合は、あのルール」をAIが判断</h4>
+                                 <p class="text-slate-600 text-sm">「この臨床試験の条件なら、このルールが適用される」といった、人間が頭の中で行っている複雑な条件分岐をAIが実行。関連情報を見落とすことなく、適切なルールを適用します。</p>
+                           </div>
+                           <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                                <p class="text-5xl mb-4">🎯</p>
+                                 <h4 class="text-xl font-bold text-[#0B4F6C] mb-2">「なぜダメか」をAIが明示</h4>
+                                 <p class="text-slate-600 text-sm">担当者の経験や解釈の揺らぎを排除し、常に一定の厳格な基準でチェックを実行。見落としゼロを目指し、すべてのアラートに根拠となる作成要領の該当箇所と違反クラスを明記します。</p>
+                           </div>
+                      </div>
+                 </div>
+            </div>
+
+            <!-- Slide 10: Context Check Example -->
+            <div class="slide">
+                 <div class="slide-header">
+                     <h3 class="text-4xl font-bold mb-2 text-center">AIによる『文脈理解』チェック事例：横断的チェック</h3>
+                     <p class="text-center text-slate-500 max-w-4xl mx-auto">AIは複数の文書を同時に読み解き、人間が見落としがちな関連性を網羅的に指摘します。全てのアラートは、どの文書のどの部分を根拠としているかを明示します。</p>
+                 </div>
+                 <div class="slide-content">
+                     <div class="w-full max-w-6xl mx-auto bg-white p-6 rounded-xl shadow-lg scrollable-content">
+                         <div class="grid grid-cols-12 gap-4 h-full">
+                             <div class="col-span-4 bg-slate-50 p-4 rounded-lg flex flex-col">
+                                <p class="font-bold text-slate-700 mb-2">添付文書</p>
+                                <div class="mt-2 space-y-3 text-sm flex-grow flex flex-col justify-around">
+                                    <div class="p-2 bg-white rounded border">
+                                        <p class="font-semibold">8. 重要な基本的注意</p>
+                                        <div class="mt-1 pl-2 border-l-2 border-slate-200">
+                                            <p class="text-slate-500">8.X <span class="text-red-600 font-medium">低血糖</span>症状及び対処法について…本剤の投与により、低血糖症状があらわれることがある。患者には低血糖症状及びその対処法について十分説明すること。</p>
+                                        </div>
+                                    </div>
+                                    <div class="p-2 bg-white rounded border">
+                                        <p class="font-semibold">9. 特定の背景を有する患者に関する注意</p>
+                                        <div class="mt-1 pl-2 border-l-2 border-slate-200 space-y-2">
+                                            <div><p class="text-slate-500">9.3 <span class="text-red-600 font-medium">肝機能障害患者</span></p></div>
+                                            <div><p class="text-slate-500 mt-2">9.5 <span class="text-red-600 font-medium">妊婦</span></p></div>
+                                        </div>
+                                    </div>
+                                </div>
+                             </div>
+                             <div class="col-span-4 bg-slate-50 p-4 rounded-lg flex flex-col">
+                                 <p class="font-bold text-slate-700 mb-2">総合製品情報概要（チェック対象）</p>
+                                 <div class="space-y-3 text-sm flex-grow flex flex-col">
+                                     <div class="p-2 bg-white rounded border flex-grow">
+                                         <p class="font-semibold">薬物動態</p>
+                                         <div class="mt-2 pl-2 border-l-2 border-slate-200">
+                                             <p class="font-medium"><mark class="bg-orange-200/75 rounded-sm">肝機能障害患者における薬物動態</mark></p>
+                                             <p class="font-medium mt-2">胎盤移行性</p>
+                                             <p class="text-slate-500 text-xs mt-1"><mark class="bg-orange-200/75 rounded-sm">妊娠中</mark>の女性n例に対し…</p>
+                                         </div>
+                                     </div>
+                                     <div class="p-2 bg-white rounded border">
+                                         <p class="font-semibold">臨床成績</p>
+                                         <div class="mt-2 pl-2 border-l-2 border-slate-200">
+                                             <p class="font-medium">安全性</p>
+                                             <p class="text-slate-500 text-xs mt-1">XX週時の主な有害事象は…製品X群で<mark class="bg-orange-200/75 rounded-sm">低血糖</mark>X例(YY%)、AST増加X例(YY%)…</p>
+                                          </div>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-span-4 flex flex-col justify-center items-center gap-2">
+                                 <p class="font-bold text-lg mb-2">AIによるアラート</p>
+                                 <div class="bg-red-100 border-2 border-red-400 p-2 rounded-lg w-full text-xs">
+                                     <p class="font-bold text-red-600">🚨 記載漏れの可能性</p>
+                                     <p class="text-slate-700">【根拠】添付文書「8. 重要な基本的注意（低血糖）」<br>【指摘】上記に関する注意喚起がありません。</p>
+                                 </div>
+                                 <div class="bg-red-100 border-2 border-red-400 p-2 rounded-lg w-full text-xs">
+                                     <p class="font-bold text-red-600">🚨 記載漏れの可能性</p>
+                                     <p class="text-slate-700">【根拠】添付文書「9.3 肝機能障害患者」<br>【指摘】上記に関する注意喚起がありません。</p>
+                                 </div>
+                                 <div class="bg-red-100 border-2 border-red-400 p-2 rounded-lg w-full text-xs">
+                                     <p class="font-bold text-red-600">🚨 記載漏れの可能性</p>
+                                     <p class="text-slate-700">【根拠】添付文書「9.5 妊婦」<br>【指摘】上記に関する注意喚起がありません。</p>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+            </div>
+
+            <!-- Slide 11: Credibility (Revised) -->
+            <div class="slide">
+                 <div class="slide-header">
+                     <h3 class="text-4xl font-bold mb-2 text-center">AIメディカルチェッカーの優位性</h3>
+                      <p class="text-center text-slate-500 max-w-4xl mx-auto">第三者機関からの評価や学会発表の実績が、本ソリューションの信頼性を担保します。</p>
+                 </div>
+                 <div class="slide-content">
+                      <div class="w-full max-w-6xl mx-auto grid grid-cols-3 gap-8">
+                         <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                             <p class="text-6xl mb-4">🧠</p>
+                             <h4 class="text-xl font-bold text-slate-800">専門知識の集積</h4>
+                             <p class="text-sm text-slate-500 mt-2">多数の製薬会社様との協業で培った、メディカルライターの暗黙知をアルゴリズムに変換。</p>
+                         </div>
+                         <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                             <p class="text-6xl mb-4">📜</p>
+                             <h4 class="text-xl font-bold text-slate-800">特許出願済み</h4>
+                             <p class="text-sm text-slate-500 mt-2">本ソリューションの中核をなす<br>独自技術について特許を出願済みです。</p>
+                         </div>
+                         <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                             <p class="text-6xl mb-4">👩‍🏫</p>
+                             <h4 class="text-xl font-bold text-slate-800">人工知能学会</h4>
+                             <p class="text-sm text-slate-500 mt-2">関連技術に関する論文が採択され、<br>口頭発表を行いました。</p>
+                         </div>
+                      </div>
+                 </div>
+            </div>
+
+            <!-- Slide 12: AI+BPO Model (Revised) -->
+            <div class="slide">
+                <div class="slide-header">
+                    <h3 class="text-4xl font-bold mb-2 text-center">導入はシンプル、効果は最大に</h3>
+                     <p class="text-center text-slate-500 max-w-4xl mx-auto">お客様は資料をお預けいただくだけ。専門家がAIの運用から結果の検証まで、すべてを担当します。</p>
+                </div>
+                 <div class="slide-content">
+                     <div class="w-full max-w-6xl mx-auto bg-white p-10 rounded-xl shadow-lg flex items-center justify-around gap-8">
+                         <div class="text-center">
+                             <p class="text-7xl">📂</p>
+                             <p class="text-xl font-bold mt-2">1. お客様</p>
+                             <p class="text-slate-600">チェックしたい資料を<br>お預けください</p>
+                        </div>
+                         <div class="text-6xl text-slate-300 font-light">→</div>
+                         <div class="text-center">
+                             <div class="relative">
+                                 <p class="text-7xl">🤖</p>
+                                 <p class="text-7xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-75">👥</p>
+                             </div>
+                             <p class="text-xl font-bold mt-2">2. 博報堂メディカル</p>
+                             <p class="text-slate-600">専門家がAIを実行・検証し<br>レポートを作成します</p>
+                         </div>
+                         <div class="text-6xl text-slate-300 font-light">→</div>
+                         <div class="text-center">
+                             <p class="text-7xl">✅</p>
+                             <p class="text-xl font-bold mt-2">3. お客様</p>
+                             <p class="text-slate-600">検証済みの<br>レポートを受領</p>
+                         </div>
+                     </div>
+                 </div>
+            </div>
+
+            <!-- Slide 13: Future Outlook (Merged) -->
+            <div class="slide">
+                <div class="slide-header">
+                    <h3 class="text-4xl font-bold mb-2 text-center">将来の展望：お客様と共に進化するAI</h3>
+                    <p class="text-center text-slate-500 max-w-4xl mx-auto">現在の「おまかせAIチェック」から、将来的にはお客様自身で運用できるSaaSモデル、さらには貴社専用のカスタムAIへと進化していきます。</p>
+                </div>
+                <div class="slide-content">
+                    <div class="w-full max-w-6xl mx-auto flex items-center justify-center gap-8">
+                        <!-- Current Phase -->
+                        <div class="bg-white p-8 rounded-lg shadow-lg text-center border-t-8 border-[#01BAEF] flex-1">
+                            <p class="text-2xl font-bold text-[#0B4F6C]">現在</p>
+                            <h4 class="text-3xl font-bold my-4">おまかせAIチェック</h4>
+                            <p class="text-slate-600 text-left text-sm">業界標準ルールを適用した高精度なチェックサービス。まずは導入負荷なく効果を実感いただけます。</p>
+                        </div>
+                        <div class="text-6xl text-slate-300 font-light px-4">→</div>
+                        <!-- Future Phase -->
+                        <div class="bg-white p-8 rounded-lg shadow-lg text-center border-t-8 border-slate-400 flex-1">
+                             <p class="text-2xl font-bold text-slate-500">将来構想</p>
+                             <h4 class="text-3xl font-bold my-4 text-slate-600">SaaSモデルと<br>カスタムAI</h4>
+                             <p class="text-slate-600 text-left text-sm">お客様自身でAIを操作できるSaaS版を提供。さらに、貴社独自の審査基準を学習させた専用AIへと進化させ、より高度な業務をサポートします。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 14: Pricing & PoC Offer -->
+            <div class="slide">
+                <div class="slide-header">
+                    <h3 class="text-4xl font-bold text-center mb-2">価格体系と無料PoC（概念実証）のご提案</h3>
+                    <p class="text-center text-slate-500 max-w-4xl mx-auto">まずはリスクなく効果を検証いただくため、無料のトライアルをご用意しました。</p>
+                </div>
+                <div class="slide-content">
+                    <div class="w-full max-w-6xl mx-auto grid grid-cols-2 gap-8 items-stretch">
+                        <!-- Pricing -->
+                        <div class="bg-white p-8 rounded-lg shadow-lg">
+                            <h4 class="text-2xl font-bold text-[#0B4F6C] text-center">価格体系（おまかせAIチェック）</h4>
+                            <p class="text-center text-slate-500 text-sm mb-6">お客様のご利用頻度に合わせて柔軟に選択可能です。</p>
+                            <div class="space-y-4">
+                                <div class="p-4 border rounded-lg">
+                                    <p class="font-bold">都度利用プラン</p>
+                                    <p class="text-slate-600">1ページあたり <span class="text-2xl font-bold text-[#01BAEF]">4,000円</span>（想定）</p>
+                                    <p class="text-xs text-slate-500 mt-1">急な依頼や、利用頻度が低い場合に最適です。</p>
+                                </div>
+                                <div class="p-4 border rounded-lg">
+                                    <p class="font-bold">月額プラン</p>
+                                    <p class="text-slate-600">ベース金額＋上限ページ数での"使い放題"</p>
+                                    <p class="text-xs text-slate-500 mt-1">継続的なご利用でコストメリットがあります。価格はご要望に応じて個別にお見積もりします。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- PoC Offer -->
+                        <div class="bg-gradient-to-br from-[#01BAEF] to-[#0B4F6C] p-8 rounded-lg shadow-lg text-white flex flex-col justify-center items-center">
+                            <h4 class="text-3xl font-bold text-center">PoC（概念実証）のご案内</h4>
+                             <p class="text-center opacity-90 mt-2">貴社の実データで、AIの力を直接お確かめください。</p>
+                            <div class="my-4 text-center">
+                                <p class="text-3xl font-bold">1資材（総合製品情報概要）</p>
+                                <p class="text-6xl font-black mt-1">2回検査無料</p>
+                            </div>
+                            <p class="text-center opacity-90 text-sm">貴社の実際の資材をお預かりし、AIによるチェック結果をレポートとしてご提出します。費用は一切かかりません。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 15: PoC Goals -->
+            <div class="slide">
+                 <div class="slide-header">
+                     <h3 class="text-4xl font-bold mb-2 text-center">PoCで目指すゴール</h3>
+                      <p class="text-center text-slate-500 max-w-4xl mx-auto">「使えるか？」ではなく「どうすれば最も効果的に使えるか？」を、客観的データに基づき共同で検証します。</p>
+                 </div>
+                 <div class="slide-content">
+                      <div class="w-full max-w-6xl mx-auto grid grid-cols-3 gap-8">
+                           <div class="bg-white p-6 rounded-lg shadow-lg scrollable-content">
+                               <p class="text-3xl font-bold text-slate-300">Goal 1</p>
+                                <h4 class="text-xl font-bold text-[#0B4F6C] my-2">価値の証明</h4>
+                                 <p class="text-slate-600 text-sm">AIが「人間の目」を補完し、重大な見落としを同等以上に検知できるか（<strong class="text-[#0B4F6C]">目標：指摘率95%以上</strong>）、また人間が見逃しがちな横断的な矛盾点を指摘できるかを検証します。</p>
+                           </div>
+                           <div class="bg-white p-6 rounded-lg shadow-lg scrollable-content">
+                               <p class="text-3xl font-bold text-slate-300">Goal 2</p>
+                               <h4 class="text-xl font-bold text-[#0B4F6C] my-2">ギャップの定量化</h4>
+                                 <p class="text-slate-600 text-sm">当社の「汎用ルール」と貴社の「独自ルール」の差を可視化します。「AIが対応可能な項目」と「引き続き人間による確認が必要な項目」を明確に切り分け（<strong class="text-[#0B4F6C]">目標：手作業での確認項目を50%以下に</strong>）、真のROIを算出する土台とします。</p>
+                           </div>
+                           <div class="bg-white p-6 rounded-lg shadow-lg scrollable-content">
+                               <p class="text-3xl font-bold text-slate-300">Goal 3</p>
+                                <h4 class="text-xl font-bold text-[#0B4F6C] my-2">実用性の確認</h4>
+                                 <p class="text-slate-600 text-sm">AIのレポートが、現場の担当者にとって直感的で理解しやすく（<strong class="text-[#0B4F6C]">目標：利用者満足度80%以上</strong>）、具体的な修正アクションにスムーズに繋げられる「本当に使える」アウトプットであることを確認します。</p>
+                           </div>
+                      </div>
+                 </div>
+            </div>
+
+            <!-- Slide 16: Blank for Q&A -->
+            <div class="slide" style="justify-content: center;">
+                <section class="text-center">
+                    <h2 class="text-6xl font-black mb-4 text-slate-700">
+                        ご清聴ありがとうございました
+                    </h2>
+                    <p class="max-w-3xl mx-auto text-3xl text-slate-500">
+                        Q & A
+                    </p>
+                </section>
+            </div>
+
+        </div>
+
+        <div id="prev-btn" class="nav-button">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+        </div>
+        <div id="next-btn" class="nav-button">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+        </div>
+
+        <div class="progress-dots"></div>
+        <div id="slide-counter" class="absolute bottom-6 right-6 text-slate-400 text-sm z-20"></div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            const nextBtn = document.getElementById('next-btn');
+            const prevBtn = document.getElementById('prev-btn');
+            const dotsContainer = document.querySelector('.progress-dots');
+            const slideCounter = document.getElementById('slide-counter'); // Get counter element
+            let currentSlide = 0;
+
+            function createDots() {
+                dotsContainer.innerHTML = '';
+                slides.forEach((_, i) => {
+                    const dot = document.createElement('div');
+                    dot.classList.add('dot');
+                    if (i === 0) dot.classList.add('active');
+                    dot.addEventListener('click', () => goToSlide(i));
+                    dotsContainer.appendChild(dot);
+                });
+            }
+
+            function updateDots() {
+                const dots = document.querySelectorAll('.progress-dots .dot');
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentSlide);
+                });
+            }
+            
+            function updateSlideCounter() {
+                if(slides.length > 0) {
+                   slideCounter.textContent = `${currentSlide + 1} / ${slides.length}`;
+                }
+            }
+
+            function goToSlide(slideNumber) {
+                if (slides.length === 0) return;
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (slideNumber + slides.length) % slides.length;
+                slides[currentSlide].classList.add('active');
+                updateDots();
+                updateSlideCounter(); 
+            }
+
+            nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                goToSlide(currentSlide + 1);
+            });
+            
+            prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                goToSlide(currentSlide - 1);
+            });
+            
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') {
+                    goToSlide(currentSlide + 1);
+                } else if (e.key === 'ArrowLeft') {
+                    goToSlide(currentSlide - 1);
+                }
+            });
+
+            createDots();
+            updateSlideCounter(); 
+
+        });
+    </script>
+</body>
+</html>
