@@ -3,8 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
     <title>【改訂版】AIメディカルチェッカー：製薬業界資材レビューの変革</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- three.js と OrbitControls.js のための importmap -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.128.0/examples/jsm/"
+        }
+      }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
@@ -130,6 +140,9 @@
             max-height: 100%;
             overflow-y: auto;
         }
+        #chaos-canvas {
+             background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(226,232,240,1) 100%);
+        }
     </style>
 </head>
 <body>
@@ -216,35 +229,33 @@
                 </div>
             </div>
 
-            <!-- Slide 4: The Wall of Tacit Knowledge -->
-             <div class="slide">
+            <!-- Slide 4: The Wall of Tacit Knowledge (Revised with Canvas) -->
+             <div id="slide-4-chaos" class="slide">
                 <div class="slide-header">
                     <h3 class="text-4xl font-bold text-center mb-2">最大の壁は『暗黙知』</h3>
-                    <p class="text-center text-slate-500 max-w-3xl mx-auto">これらの外部要因は、組織内部に最も解決の難しい「壁」を生み出します。それこそが、属人化したノウハウ、すなわち『暗黙知』です。</p>
+                    <p class="text-center text-slate-500 max-w-3xl mx-auto">専門家の頭の中は、言語化が難しい無数のルールや経験が複雑に絡み合った状態です。</p>
                 </div>
-                <div class="slide-content">
-                    <div class="w-full max-w-5xl mx-auto flex flex-col items-center justify-center">
-                        <div class="bg-white p-8 rounded-2xl shadow-xl text-center border-t-8 border-red-500 w-2/3">
-                            <div class="text-6xl mb-4">👤</div>
-                            <h4 class="text-3xl font-bold mb-2 text-red-700">暗黙知の壁</h4>
-                            <p class="text-slate-600 text-sm">ベテランの経験と勘に依存した審査プロセス。判断基準が明文化されず、品質のばらつき、時間の浪費、コンプライアンスリスクを生む、最も根深い課題です。</p>
-                        </div>
+                <div class="slide-content w-full">
+                    <div class="w-full h-full rounded-2xl shadow-lg relative overflow-hidden">
+                        <canvas id="chaos-canvas" class="absolute inset-0 w-full h-full"></canvas>
                     </div>
                 </div>
             </div>
             
             <!-- Slide 5: Core Tech (REVISED with images) -->
             <div class="slide">
-                 <div class="slide-header">
-                     <h3 class="text-4xl font-bold mb-2 text-center">我々の解決策：AIによる「暗黙知」の形式知化</h3>
-                      <p class="text-center text-slate-500 max-w-4xl mx-auto">属人的な判断ロジックを、再現性のあるアルゴリズムに変換し、誰でも公平・均質な一次チェックを可能にします。</p>
-                 </div>
-                 <div class="slide-content">
-                      <div class="w-full max-w-5xl mx-auto grid grid-cols-2 gap-8 items-center">
-                          <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=1931&auto=format&fit=crop" alt="プログラミング言語のイメージ" class="rounded-lg shadow-lg object-cover w-full h-96">
-                           <img src="https://h-medical.github.io/AI-presentation/Diagram_Image.png" alt="フローチャートのイメージ" class="rounded-lg shadow-lg object-cover w-full h-96">
-                      </div>
-                 </div>
+                 <div class="w-full max-w-5xl flex flex-col items-center">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4">「暗黙知」を「形式知」へ変換</h2>
+                    <p class="text-lg text-gray-600 mb-6">AIメディカルチェッカーは、その混沌とした思考プロセスを解析し、実行可能なプログラムへと体系化しています。</p>
+                    <div class="w-full h-[450px] grid grid-cols-2 gap-4">
+                        <div class="h-full rounded-2xl shadow-lg overflow-hidden">
+                             <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=1931&auto=format&fit=crop" alt="プログラムコードの背景画像" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1E293B/FFFFFF?text=Image+Not+Found';">
+                        </div>
+                        <div class="h-full rounded-2xl shadow-lg overflow-hidden bg-white flex items-center justify-center p-4">
+                            <img src="https://h-medical.github.io/AI-presentation/Diagram_Image.png" alt="形式知化されたC++とPythonのAPIフローチャートのイメージ" class="w-full h-full object-contain" onerror="this.onerror=null;this.src='https://placehold.co/600x400/01BAEF/FFFFFF?text=Image+Not+Found';">
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Slide 6: Solution Intro (Moved & MODIFIED) -->
@@ -262,49 +273,13 @@
                  <p class="absolute bottom-6 right-6 text-sm text-slate-500">*AIによる解析時間</p>
             </div>
 
-            <!-- Slide 7: Architecture -->
+            <!-- Slide 7: Architecture (REVISED with Image) -->
             <div class="slide">
                  <div class="slide-header">
                      <h3 class="text-4xl font-bold mb-2 text-center">AIメディカルチェッカーの全体設計</h3>
-                      <p class="text-center text-slate-500 max-w-4xl mx-auto">複数の情報源をインプットとし、構造解析と独自のアルゴリズムを経て、精度の高いアラートを生成します。</p>
                  </div>
                  <div class="slide-content">
-                      <div class="w-full max-w-6xl mx-auto bg-white p-8 rounded-xl shadow-lg flex items-stretch justify-around gap-2">
-                           <div class="text-center flex-1 flex flex-col">
-                                <h4 class="text-lg font-bold mb-4">1. インプット</h4>
-                                <div class="space-y-2 text-sm flex-1 flex flex-col justify-center">
-                                     <div class="bg-slate-100 p-2 rounded">IF / CTD</div>
-                                     <div class="bg-slate-100 p-2 rounded">添付文書</div>
-                                     <div class="bg-slate-100 p-2 rounded">総合製品情報概要</div>
-                                </div>
-                           </div>
-                           <div class="flex items-center text-5xl text-slate-300 font-light">→</div>
-                           <div class="text-center flex-1 flex flex-col">
-                                <h4 class="text-lg font-bold mb-4">2. 構造化 & 解析</h4>
-                                 <div class="flowchart-box rounded-xl p-4 flex-1 flex flex-col justify-center">
-                                     <p class="text-5xl">🤖</p>
-                                     <h4 class="text-md font-bold text-[#0B4F6C]">AIエンジン</h4>
-                                     <p class="text-xs text-slate-500">レイアウト解析 + テキスト抽出</p>
-                                 </div>
-                           </div>
-                           <div class="flex items-center text-5xl text-slate-300 font-light">→</div>
-                           <div class="text-center flex-1 flex flex-col">
-                                <h4 class="text-lg font-bold mb-4">3. アルゴリズム適用</h4>
-                                <div class="flowchart-box rounded-xl p-4 flex-1 flex flex-col justify-center">
-                                     <p class="text-5xl">📚</p>
-                                     <h4 class="text-md font-bold text-[#0B4F6C]">ルールベース照合</h4>
-                                     <p class="text-xs text-slate-500">約200のチェックリスト<br/>15の専門用語リスト</p>
-                                </div>
-                           </div>
-                           <div class="flex items-center text-5xl text-slate-300 font-light">→</div>
-                           <div class="text-center flex-1 flex flex-col">
-                                <h4 class="text-lg font-bold mb-4">4. アウトプット</h4>
-                                <div class="p-4 bg-green-100 border-2 border-green-500 rounded-xl flex-1 flex flex-col justify-center">
-                                     <p class="text-5xl">📊</p>
-                                    <p class="text-green-700 font-bold">アラート表示</p>
-                                </div>
-                           </div>
-                      </div>
+                    <img src="https://h-medical.github.io/AI-presentation-detail/architecture.jpg" alt="AIメディカルチェッカーの全体設計" class="w-full h-full object-contain" onerror="this.onerror=null;this.src='https://placehold.co/1280x720/F0F0F0/CCCCCC?text=Architecture+Diagram';">
                  </div>
             </div>
 
@@ -374,9 +349,9 @@
                                  <p class="text-slate-600 text-sm">「この臨床試験の条件なら、このルールが適用される」といった、人間が頭の中で行っている複雑な条件分岐をAIが実行。関連情報を見落とすことなく、適切なルールを適用します。</p>
                            </div>
                            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                                <p class="text-5xl mb-4">🎯</p>
-                                 <h4 class="text-xl font-bold text-[#0B4F6C] mb-2">「なぜダメか」をAIが明示</h4>
-                                 <p class="text-slate-600 text-sm">担当者の経験や解釈の揺らぎを排除し、常に一定の厳格な基準でチェックを実行。見落としゼロを目指し、すべてのアラートに根拠となる作成要領の該当箇所と違反クラスを明記します。</p>
+                                <p class="text-5xl mb-4">🗺️</p>
+                                 <h4 class="text-xl font-bold text-[#0B4F6C] mb-2">客観的な論点をAIが整理</h4>
+                                 <p class="text-slate-600 text-sm">AIが規制やルールに基づいた客観的な指摘事項を網羅的にリストアップ。人間はその"地図"を基に、より高次の判断に集中できます。</p>
                            </div>
                       </div>
                  </div>
@@ -386,7 +361,6 @@
             <div class="slide">
                  <div class="slide-header">
                      <h3 class="text-4xl font-bold mb-2 text-center">AIによる『文脈理解』チェック事例：横断的チェック</h3>
-                     <p class="text-center text-slate-500 max-w-4xl mx-auto">AIは複数の文書を同時に読み解き、人間が見落としがちな関連性を網羅的に指摘します。全てのアラートは、どの文書のどの部分を根拠としているかを明示します。</p>
                  </div>
                  <div class="slide-content">
                      <div class="w-full max-w-6xl mx-auto bg-white p-6 rounded-xl shadow-lg scrollable-content">
@@ -453,7 +427,7 @@
             <div class="slide">
                  <div class="slide-header">
                      <h3 class="text-4xl font-bold mb-2 text-center">AIメディカルチェッカーの優位性</h3>
-                      <p class="text-center text-slate-500 max-w-4xl mx-auto">第三者機関からの評価や学会発表の実績が、本ソリューションの信頼性を担保します。</p>
+                      <p class="text-center text-slate-500 max-w-4xl mx-auto">本ソリューションは以下の特徴を有します。</p>
                  </div>
                  <div class="slide-content">
                       <div class="w-full max-w-6xl mx-auto grid grid-cols-3 gap-8">
@@ -533,46 +507,61 @@
                 </div>
             </div>
             
-            <!-- Slide 14: Pricing & PoC Offer -->
+            <!-- Slide 14: Pricing & PoC Offer (Revised) -->
             <div class="slide">
                 <div class="slide-header">
-                    <h3 class="text-4xl font-bold text-center mb-2">価格体系と無料PoC（概念実証）のご提案</h3>
-                    <p class="text-center text-slate-500 max-w-4xl mx-auto">まずはリスクなく効果を検証いただくため、無料のトライアルをご用意しました。</p>
+                    <h3 class="text-4xl font-bold text-center mb-2">価格体系と導入ステップのご提案</h3>
                 </div>
                 <div class="slide-content">
-                    <div class="w-full max-w-6xl mx-auto grid grid-cols-2 gap-8 items-stretch">
-                        <!-- Pricing -->
-                        <div class="bg-white p-8 rounded-lg shadow-lg">
-                            <h4 class="text-2xl font-bold text-[#0B4F6C] text-center">価格体系（おまかせAIチェック）</h4>
-                            <p class="text-center text-slate-500 text-sm mb-6">お客様のご利用頻度に合わせて柔軟に選択可能です。</p>
-                            <div class="space-y-4">
-                                <div class="p-4 border rounded-lg">
-                                    <p class="font-bold">都度利用プラン</p>
-                                    <p class="text-slate-600">1ページあたり <span class="text-2xl font-bold text-[#01BAEF]">4,000円</span>（想定）</p>
-                                    <p class="text-xs text-slate-500 mt-1">急な依頼や、利用頻度が低い場合に最適です。</p>
-                                </div>
-                                <div class="p-4 border rounded-lg">
-                                    <p class="font-bold">月額プラン</p>
-                                    <p class="text-slate-600">ベース金額＋上限ページ数での"使い放題"</p>
-                                    <p class="text-xs text-slate-500 mt-1">継続的なご利用でコストメリットがあります。価格はご要望に応じて個別にお見積もりします。</p>
-                                </div>
-                            </div>
+                    <div class="w-full max-w-6xl mx-auto grid grid-cols-2 gap-8 items-start">
+                        <!-- Pricing Model -->
+                        <div class="bg-white p-8 rounded-lg shadow-lg h-full">
+                            <h4 class="text-2xl font-bold text-center text-[#0B4F6C] mb-4">価格体系</h4>
+                            <p class="text-slate-600">本サービスの価格は現在、最終調整中です。一般的なSaaSと同様に、安心してご評価いただける**無料トライアル期間**を設けた上で、正式にご契約いただくモデルを想定しております。</p>
                         </div>
-                        <!-- PoC Offer -->
-                        <div class="bg-gradient-to-br from-[#01BAEF] to-[#0B4F6C] p-8 rounded-lg shadow-lg text-white flex flex-col justify-center items-center">
-                            <h4 class="text-3xl font-bold text-center">PoC（概念実証）のご案内</h4>
-                             <p class="text-center opacity-90 mt-2">貴社の実データで、AIの力を直接お確かめください。</p>
-                            <div class="my-4 text-center">
-                                <p class="text-3xl font-bold">1資材（総合製品情報概要）</p>
-                                <p class="text-6xl font-black mt-1">2回検査無料</p>
-                            </div>
-                            <p class="text-center opacity-90 text-sm">貴社の実際の資材をお預かりし、AIによるチェック結果をレポートとしてご提出します。費用は一切かかりません。</p>
+                        <!-- Introduction Steps -->
+                        <div class="bg-white p-8 rounded-lg shadow-lg h-full">
+                             <h4 class="text-2xl font-bold text-center text-[#0B4F6C] mb-4">導入ステップ</h4>
+                             <ol class="relative border-l border-gray-200 dark:border-gray-700">                  
+                                <li class="mb-6 ml-6">
+                                    <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -left-3 ring-8 ring-white">1</span>
+                                    <h5 class="font-bold">デモ体験</h5>
+                                    <p class="text-sm text-slate-500">来月以降、実際の画面で操作感を体験</p>
+                                </li>
+                                <li class="mb-6 ml-6">            
+                                    <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -left-3 ring-8 ring-white">2</span>
+                                    <h5 class="font-bold">無償PoC（無料トライアル期間）</h5>
+                                    <p class="text-sm text-slate-500">まずは効果を実感</p>
+                                </li>
+                                <li class="ml-6">
+                                    <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -left-3 ring-8 ring-white">3</span>
+                                    <h5 class="font-bold">正式導入</h5>
+                                    <p class="text-sm text-slate-500">貴社の課題に合わせ最適にご提案</p>
+                                </li>
+                            </ol>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 15: PoC Goals -->
+            <!-- Slide 15: PoC Goals (Revised) -->
+            <div class="slide">
+                 <div class="slide-header">
+                     <h3 class="text-4xl font-bold mb-2 text-center">PoC（概念実証）のご案内</h3>
+                 </div>
+                 <div class="slide-content">
+                    <div class="w-full max-w-4xl mx-auto bg-gradient-to-br from-[#01BAEF] to-[#0B4F6C] p-12 rounded-lg shadow-lg text-white flex flex-col justify-center items-center text-center">
+                        <h4 class="text-3xl font-bold">貴社の実データで、AIの力を直接お確かめください</h4>
+                        <div class="my-6">
+                            <p class="text-8xl font-black">2週間</p>
+                        </div>
+                        <p class="text-lg opacity-90">無償でAIによるチェック結果をご報告します。</p>
+                        <p class="text-xs opacity-80 mt-2">※期間中、最大4回まで総合製品情報概要のAIチェックが可能です。</p>
+                    </div>
+                 </div>
+            </div>
+
+            <!-- Slide 16: PoC Goals (Revised) -->
             <div class="slide">
                  <div class="slide-header">
                      <h3 class="text-4xl font-bold mb-2 text-center">PoCで目指すゴール</h3>
@@ -582,24 +571,54 @@
                       <div class="w-full max-w-6xl mx-auto grid grid-cols-3 gap-8">
                            <div class="bg-white p-6 rounded-lg shadow-lg scrollable-content">
                                <p class="text-3xl font-bold text-slate-300">Goal 1</p>
-                                <h4 class="text-xl font-bold text-[#0B4F6C] my-2">価値の証明</h4>
-                                 <p class="text-slate-600 text-sm">AIが「人間の目」を補完し、重大な見落としを同等以上に検知できるか（<strong class="text-[#0B4F6C]">目標：指摘率95%以上</strong>）、また人間が見逃しがちな横断的な矛盾点を指摘できるかを検証します。</p>
+                                <h4 class="text-xl font-bold text-[#0B4F6C] my-2">精度検証</h4>
+                                 <p class="text-slate-600 text-sm">人間によるチェックと比較し、AIの検出率や見落とし率を評価します。指標については、貴社の基準に合わせて別途ご相談させてください。</p>
                            </div>
                            <div class="bg-white p-6 rounded-lg shadow-lg scrollable-content">
                                <p class="text-3xl font-bold text-slate-300">Goal 2</p>
-                               <h4 class="text-xl font-bold text-[#0B4F6C] my-2">ギャップの定量化</h4>
-                                 <p class="text-slate-600 text-sm">当社の「汎用ルール」と貴社の「独自ルール」の差を可視化します。「AIが対応可能な項目」と「引き続き人間による確認が必要な項目」を明確に切り分け（<strong class="text-[#0B4F6C]">目標：手作業での確認項目を50%以下に</strong>）、真のROIを算出する土台とします。</p>
+                               <h4 class="text-xl font-bold text-[#0B4F6C] my-2">削減時間の検証</h4>
+                                 <p class="text-slate-600 text-sm">AIの導入によって、実際のレビュー業務にかかる時間がどれだけ削減されるかを測定・検証します。</p>
                            </div>
                            <div class="bg-white p-6 rounded-lg shadow-lg scrollable-content">
                                <p class="text-3xl font-bold text-slate-300">Goal 3</p>
-                                <h4 class="text-xl font-bold text-[#0B4F6C] my-2">実用性の確認</h4>
-                                 <p class="text-slate-600 text-sm">AIのレポートが、現場の担当者にとって直感的で理解しやすく（<strong class="text-[#0B4F6C]">目標：利用者満足度80%以上</strong>）、具体的な修正アクションにスムーズに繋げられる「本当に使える」アウトプットであることを確認します。</p>
+                                <h4 class="text-xl font-bold text-[#0B4F6C] my-2">AIと人間の役割分担</h4>
+                                 <p class="text-slate-600 text-sm">AIが担うべき定型的なチェックと、人間が集中すべき高度な判断業務。その最適な分担ラインを、実際の業務を通して探ります。</p>
                            </div>
                       </div>
                  </div>
             </div>
 
-            <!-- Slide 16: Blank for Q&A -->
+            <!-- NEW Slide 17: Summary and Next Steps -->
+            <div class="slide">
+                <div class="slide-header">
+                    <h3 class="text-4xl font-bold mb-2 text-center">本日のまとめと、次回のお願い</h3>
+                </div>
+                <div class="slide-content">
+                    <div class="w-full max-w-4xl mx-auto grid grid-cols-1 gap-8 items-start">
+                        <!-- Summary -->
+                        <div class="bg-white p-8 rounded-lg shadow-lg">
+                            <h4 class="text-2xl font-bold text-[#0B4F6C] mb-4">本日のまとめ</h4>
+                            <ul class="list-disc list-inside space-y-3 text-slate-700">
+                                <li>製薬業界の資材審査は「暗黙知」により多くの課題を抱えている。</li>
+                                <li>当社のAIは「構造化」と「アルゴリズム」で暗黙知を形式知化し、業務を効率化する。</li>
+                                <li>まずはPoCを通じて、その価値を直接ご体感いただきたい。</li>
+                            </ul>
+                        </div>
+                        <!-- Next Steps -->
+                        <div class="bg-blue-50 p-8 rounded-lg shadow-lg border-l-4 border-blue-500">
+                            <h4 class="text-2xl font-bold text-blue-800 mb-4">次回のお願い</h4>
+                            <div class="space-y-4">
+                                <div>
+                                    <h5 class="font-bold text-blue-700">デモのご案内</h5>
+                                    <p class="text-sm text-slate-600">来月以降、デモ機が完成次第、改めて操作を交えたご紹介の機会を頂戴できればと存じます。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 18: Blank for Q&A -->
             <div class="slide" style="justify-content: center;">
                 <section class="text-center">
                     <h2 class="text-6xl font-black mb-4 text-slate-700">
@@ -625,7 +644,10 @@
     </div>
 
 
-    <script>
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+        
         document.addEventListener('DOMContentLoaded', () => {
             const slides = document.querySelectorAll('.slide');
             const nextBtn = document.getElementById('next-btn');
@@ -633,6 +655,75 @@
             const dotsContainer = document.querySelector('.progress-dots');
             const slideCounter = document.getElementById('slide-counter'); // Get counter element
             let currentSlide = 0;
+            let chaosAnimation;
+
+            const setupInteractive3DChaos = (canvasId) => {
+                const canvas = document.getElementById(canvasId);
+                if (!canvas) return { stop: () => {} };
+                const container = canvas.parentElement;
+                let animationFrameId;
+
+                const scene = new THREE.Scene();
+                const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+                camera.position.z = 15;
+
+                const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+                renderer.setPixelRatio(window.devicePixelRatio);
+                renderer.setSize(container.clientWidth, container.clientHeight);
+
+                const controls = new OrbitControls(camera, renderer.domElement);
+                controls.enableDamping = true;
+                controls.dampingFactor = 0.05;
+                controls.autoRotate = true;
+                controls.autoRotateSpeed = 0.5;
+                controls.enableZoom = true;
+
+                scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+                const dirLight = new THREE.DirectionalLight(0xffffff, 1);
+                dirLight.position.set(5, 5, 5);
+                scene.add(dirLight);
+
+                const group = new THREE.Group();
+                const numLines = 25;
+                const colors = [0x34495E, 0x7F8C8D, 0x95A5A6];
+
+                for (let i = 0; i < numLines; i++) {
+                    const points = [];
+                    for (let j = 0; j < 10; j++) {
+                        points.push(new THREE.Vector3((Math.random() - 0.5) * 20, (Math.random() - 0.5) * 20, (Math.random() - 0.5) * 20));
+                    }
+                    const curve = new THREE.CatmullRomCurve3(points, true, 'catmullrom', 0.5);
+                    const geometry = new THREE.TubeGeometry(curve, 100, 0.1, 8, false);
+                    const material = new THREE.MeshStandardMaterial({ color: colors[i % colors.length], roughness: 0.6, metalness: 0.2 });
+                    const tube = new THREE.Mesh(geometry, material);
+                    group.add(tube);
+                }
+                scene.add(group);
+
+                const animate = () => {
+                    animationFrameId = requestAnimationFrame(animate);
+                    controls.update();
+                    renderer.render(scene, camera);
+                };
+
+                const onResize = () => {
+                    if (!container) return;
+                    camera.aspect = container.clientWidth / container.clientHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(container.clientWidth, container.clientHeight);
+                }
+
+                window.addEventListener('resize', onResize);
+                animate();
+
+                return {
+                    stop: () => {
+                        if(animationFrameId) cancelAnimationFrame(animationFrameId);
+                        window.removeEventListener('resize', onResize);
+                    }
+                };
+            };
+
 
             function createDots() {
                 dotsContainer.innerHTML = '';
@@ -660,9 +751,22 @@
 
             function goToSlide(slideNumber) {
                 if (slides.length === 0) return;
+                
+                const oldSlide = slides[currentSlide];
+                if(oldSlide.id === 'slide-4-chaos' && chaosAnimation){
+                    chaosAnimation.stop();
+                    chaosAnimation = null;
+                }
+
                 slides[currentSlide].classList.remove('active');
                 currentSlide = (slideNumber + slides.length) % slides.length;
-                slides[currentSlide].classList.add('active');
+                const newSlide = slides[currentSlide];
+                newSlide.classList.add('active');
+                
+                if(newSlide.id === 'slide-4-chaos' && !chaosAnimation){
+                    chaosAnimation = setupInteractive3DChaos('chaos-canvas');
+                }
+
                 updateDots();
                 updateSlideCounter(); 
             }
@@ -688,6 +792,10 @@
             createDots();
             updateSlideCounter(); 
 
+            // Initial check for the first slide
+             if (slides[currentSlide] && slides[currentSlide].id === 'slide-4-chaos') {
+                chaosAnimation = setupInteractive3DChaos('chaos-canvas');
+            }
         });
     </script>
 </body>
